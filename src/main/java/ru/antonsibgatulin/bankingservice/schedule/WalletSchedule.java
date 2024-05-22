@@ -71,14 +71,15 @@ public class WalletSchedule implements Runnable {
     }
 
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW, readOnly = true, isolation = Isolation.SERIALIZABLE)
+    @Transactional(propagation = Propagation.REQUIRES_NEW, isolation = Isolation.SERIALIZABLE)
     public void doBalance(BalanceDto balanceDto) {
         try {
 
             var wallet = walletRepository.getWalletById(balanceDto.walletId);
             wallet.setBalance(wallet.getBalance().add(balanceDto.dtPlus));
-
+            walletRepository.save(wallet);
         } catch (Exception e) {
+            e.printStackTrace();
             balanceDtoQueue.add(balanceDto);
         }
     }

@@ -75,7 +75,7 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
 
-    @Transactional(readOnly = true, propagation = Propagation.REQUIRES_NEW, isolation = Isolation.SERIALIZABLE, rollbackFor = Exception.class)
+    @Transactional(propagation = Propagation.REQUIRES_NEW, isolation = Isolation.SERIALIZABLE, rollbackFor = Exception.class)
     public TransactionStatusDto doTransaction(BigDecimal amount, User senderUser, User receivedUser) {
         var senderWallet = walletRepository.getWalletByUser(senderUser);
         var receivedWallet = walletRepository.getWalletByUser(receivedUser);
