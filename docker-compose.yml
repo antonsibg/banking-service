@@ -1,0 +1,28 @@
+version: '3'
+services:
+  postgresql:
+    image: postgres:alpine
+    environment:
+      POSTGRES_DB: banking_service
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: Dert869$
+    ports:
+      - 5433:5432
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+volumes:
+  postgres-data: { }
+
+#  app:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#    ports:
+#      - 8080:8080
+#    depends_on:
+#      - db
+#    environment:
+#      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/banking_service
+#      SPRING_DATASOURCE_USERNAME: your_username
+#      SPRING_DATASOURCE_PASSWORD: your_password
